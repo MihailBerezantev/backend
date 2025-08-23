@@ -18,6 +18,16 @@ app.use(cors({
 }));
 app.use(express.json());
 
+// Health check route
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'Mon Générateur Backend is running',
+    version: '1.0.0',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Route to expose API parameters
 app.get('/api/parameters', (req, res) => {
   res.json({
