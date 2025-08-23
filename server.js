@@ -49,6 +49,17 @@ app.get('/', (req, res) => {
   });
 });
 
+// Debug route pour vérifier les variables d'environnement
+app.get('/debug', (req, res) => {
+  res.json({
+    hasReplicateKey: !!process.env.REPLICATE_API_KEY,
+    keyLength: process.env.REPLICATE_API_KEY?.length || 0,
+    nodeEnv: process.env.NODE_ENV,
+    port: process.env.PORT,
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Route to expose API parameters
 app.get('/api/parameters', (req, res) => {
   res.json({
@@ -74,6 +85,8 @@ app.get('/api/parameters', (req, res) => {
 app.post('/api/generate-audio', async (req, res) => {
   try {
     console.log('Full request body:', req.body); // Debug pour voir tout ce qui est reçu
+    console.log('REPLICATE_API_KEY exists:', !!process.env.REPLICATE_API_KEY); // Debug pour vérifier la clé
+    console.log('REPLICATE_API_KEY length:', process.env.REPLICATE_API_KEY?.length); // Debug pour la longueur
     
     const { 
       prompt, 
@@ -140,6 +153,8 @@ app.post('/api/generate-audio', async (req, res) => {
 app.post('/api/riffusion-generate', async (req, res) => {
   try {
     console.log('Riffusion request body:', req.body);
+    console.log('REPLICATE_API_KEY exists:', !!process.env.REPLICATE_API_KEY); // Debug pour vérifier la clé
+    console.log('REPLICATE_API_KEY length:', process.env.REPLICATE_API_KEY?.length); // Debug pour la longueur
     
     const { 
       prompt, 
