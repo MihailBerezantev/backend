@@ -11,7 +11,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:5173',
-    'https://musigenerator.vercel.app', // URL réelle de votre frontend Vercel
+    'https://musigenerator.vercel.app',
+    'https://musigenerator-git-main-berezantevmihail-4730s-projects.vercel.app', // Nouvelle URL Vercel
     'https://*.vercel.app' // Accepter tous les sous-domaines Vercel
   ],
   credentials: true
