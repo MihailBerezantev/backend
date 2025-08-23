@@ -12,7 +12,8 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:5173',
     'https://musigenerator.vercel.app',
-    'https://musigenerator-git-main-berezantevmihail-4730s-projects.vercel.app', // Nouvelle URL Vercel
+    'https://musigenerator-git-main-berezantevmihail-4730s-projects.vercel.app',
+    'https://test2-neon-psi.vercel.app', // Nouvelle URL Vercel
     'https://*.vercel.app' // Accepter tous les sous-domaines Vercel
   ],
   credentials: true
