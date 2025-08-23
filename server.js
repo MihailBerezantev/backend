@@ -11,7 +11,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'http://localhost:5173',
-    'https://your-vercel-app.vercel.app' // Remplacez par votre URL Vercel
+    'https://your-vercel-app.vercel.app', // Remplacez par votre URL Vercel réelle
+    'https://*.vercel.app' // Accepter tous les sous-domaines Vercel
   ],
   credentials: true
 }));
