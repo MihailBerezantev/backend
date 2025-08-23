@@ -8,14 +8,33 @@ const app = express();
 
 // Configuration CORS pour Vercel
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://musigenerator.vercel.app',
-    'https://musigenerator-git-main-berezantevmihail-4730s-projects.vercel.app',
-    'https://test2-neon-psi.vercel.app', // Nouvelle URL Vercel
-    'https://*.vercel.app' // Accepter tous les sous-domaines Vercel
-  ],
+  origin: function (origin, callback) {
+    // Permettre les requêtes sans origin (comme les apps mobiles)
+    if (!origin) return callback(null, true);
+    
+    // Liste des origines autorisées
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'https://musigenerator.vercel.app',
+      'https://musigenerator-git-main-berezantevmihail-4730s-projects.vercel.app',
+      'https://test2-neon-psi.vercel.app',
+      'https://test2-ad1w.vercel.app'
+    ];
+    
+    // Permettre toutes les URLs Vercel
+    if (origin.includes('.vercel.app')) {
+      return callback(null, true);
+    }
+    
+    // Vérifier si l'origine est dans la liste autorisée
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    // Rejeter l'origine
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 app.use(express.json());
