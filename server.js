@@ -9,8 +9,14 @@ const app = express();
 // Configuration CORS pour Vercel
 app.use(cors({
   origin: function (origin, callback) {
+    // Log pour debugging
+    console.log('🔍 CORS Debug - Origin received:', origin);
+    
     // Permettre les requêtes sans origin (comme les apps mobiles)
-    if (!origin) return callback(null, true);
+    if (!origin) {
+      console.log('✅ CORS - Allowing request without origin');
+      return callback(null, true);
+    }
     
     // Liste des origines autorisées
     const allowedOrigins = [
@@ -26,15 +32,19 @@ app.use(cors({
     
     // Permettre toutes les URLs Vercel
     if (origin.includes('.vercel.app')) {
+      console.log('✅ CORS - Vercel domain allowed:', origin);
       return callback(null, true);
     }
     
     // Vérifier si l'origine est dans la liste autorisée
     if (allowedOrigins.includes(origin)) {
+      console.log('✅ CORS - Origin allowed from static list:', origin);
       return callback(null, true);
     }
     
     // Rejeter l'origine
+    console.log('❌ CORS - Origin rejected:', origin);
+    console.log('📝 CORS - Allowed origins:', allowedOrigins);
     return callback(new Error('Not allowed by CORS'));
   },
   credentials: true
