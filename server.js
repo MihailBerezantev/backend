@@ -8,45 +8,7 @@ const app = express();
 
 // Configuration CORS pour Vercel
 app.use(cors({
-  origin: function (origin, callback) {
-    // Log pour debugging
-    console.log('🔍 CORS Debug - Origin received:', origin);
-    
-    // Permettre les requêtes sans origin (comme les apps mobiles)
-    if (!origin) {
-      console.log('✅ CORS - Allowing request without origin');
-      return callback(null, true);
-    }
-    
-    // Liste des origines autorisées
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:5173',
-      'http://localhost:5176', // Port de développement actuel
-      'http://localhost:5177', // Port de développement alternatif
-      'https://musigenerator.vercel.app',
-      'https://musigenerator-git-main-berezantevmihail-4730s-projects.vercel.app',
-      'https://test2-neon-psi.vercel.app',
-      'https://test2-ad1w.vercel.app'
-    ];
-    
-    // Permettre toutes les URLs Vercel
-    if (origin.includes('.vercel.app')) {
-      console.log('✅ CORS - Vercel domain allowed:', origin);
-      return callback(null, true);
-    }
-    
-    // Vérifier si l'origine est dans la liste autorisée
-    if (allowedOrigins.includes(origin)) {
-      console.log('✅ CORS - Origin allowed from static list:', origin);
-      return callback(null, true);
-    }
-    
-    // Rejeter l'origine
-    console.log('❌ CORS - Origin rejected:', origin);
-    console.log('📝 CORS - Allowed origins:', allowedOrigins);
-    return callback(new Error('Not allowed by CORS'));
-  },
+  origin: true, // Temporairement très permissif pour debugging
   credentials: true
 }));
 app.use(express.json());
