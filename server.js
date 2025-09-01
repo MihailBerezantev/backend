@@ -16,7 +16,8 @@ app.use(cors({
     const allowedOrigins = [
       'http://localhost:3000',
       'http://localhost:5173',
-      'http://localhost:5177', // Nouveau port de développement
+      'http://localhost:5176', // Port de développement actuel
+      'http://localhost:5177', // Port de développement alternatif
       'https://musigenerator.vercel.app',
       'https://musigenerator-git-main-berezantevmihail-4730s-projects.vercel.app',
       'https://test2-neon-psi.vercel.app',
